@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.almana.pipezlagfix.mixin",
+  "plugin": "me.almana.pipezlagfix.mixin.MixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MixinPipeLogicTileEntity",
+    "MixinItemPipeType"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
