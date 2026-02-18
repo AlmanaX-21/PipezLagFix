@@ -1,6 +1,6 @@
 package me.almana.pipezlagfix;
 
-import net.neoforged.neoforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 

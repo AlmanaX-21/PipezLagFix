@@ -6,7 +6,7 @@ import net.minecraft.core.Direction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
-@Mixin(PipeLogicTileEntity.class)
+@Mixin(value = PipeLogicTileEntity.class, remap = false)
 public class MixinPipeLogicTileEntity implements IItemPipeBackoff {
 
     @Unique

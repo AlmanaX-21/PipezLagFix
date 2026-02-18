@@ -6,7 +6,7 @@ import de.maxhenkel.pipez.blocks.tileentity.types.ItemPipeType;
 import me.almana.pipezlagfix.Config;
 import me.almana.pipezlagfix.IItemPipeBackoff;
 import net.minecraft.core.Direction;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,13 +17,13 @@ import me.almana.pipezlagfix.TrackingItemHandler;
 
 import java.util.List;
 
-@Mixin(ItemPipeType.class)
+@Mixin(value = ItemPipeType.class, remap = false)
 public class MixinItemPipeType {
 
     @Unique
     private final ThreadLocal<Boolean> pipezlagfix$success = ThreadLocal.withInitial(() -> false);
 
-    @Inject(method = "insertEqually", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "insertEqually", at = @At("HEAD"), cancellable = true, remap = false)
     public void startEqually(PipeLogicTileEntity tileEntity, Direction side,
             List<PipeTileEntity.Connection> connections, IItemHandler itemHandler, CallbackInfo ci) {
         pipezlagfix$success.set(false);
@@ -32,7 +32,7 @@ public class MixinItemPipeType {
         }
     }
 
-    @Inject(method = "insertOrdered", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "insertOrdered", at = @At("HEAD"), cancellable = true, remap = false)
     public void startOrdered(PipeLogicTileEntity tileEntity, Direction side,
             List<PipeTileEntity.Connection> connections, IItemHandler itemHandler, CallbackInfo ci) {
         pipezlagfix$success.set(false);
@@ -41,23 +41,23 @@ public class MixinItemPipeType {
         }
     }
 
-    @ModifyVariable(method = "insertEqually", at = @At("HEAD"), argsOnly = true)
+    @ModifyVariable(method = "insertEqually", at = @At("HEAD"), argsOnly = true, remap = false)
     public IItemHandler wrapHandlerEqually(IItemHandler handler) {
         return new TrackingItemHandler(handler, () -> pipezlagfix$success.set(true));
     }
 
-    @ModifyVariable(method = "insertOrdered", at = @At("HEAD"), argsOnly = true)
+    @ModifyVariable(method = "insertOrdered", at = @At("HEAD"), argsOnly = true, remap = false)
     public IItemHandler wrapHandlerOrdered(IItemHandler handler) {
         return new TrackingItemHandler(handler, () -> pipezlagfix$success.set(true));
     }
 
-    @Inject(method = "insertEqually", at = @At("RETURN"))
+    @Inject(method = "insertEqually", at = @At("RETURN"), remap = false)
     public void endEqually(PipeLogicTileEntity tileEntity, Direction side, List<PipeTileEntity.Connection> connections,
             IItemHandler itemHandler, CallbackInfo ci) {
         pipezlagfix$applyBackoff(tileEntity, side);
     }
 
-    @Inject(method = "insertOrdered", at = @At("RETURN"))
+    @Inject(method = "insertOrdered", at = @At("RETURN"), remap = false)
     public void endOrdered(PipeLogicTileEntity tileEntity, Direction side, List<PipeTileEntity.Connection> connections,
             IItemHandler itemHandler, CallbackInfo ci) {
         pipezlagfix$applyBackoff(tileEntity, side);

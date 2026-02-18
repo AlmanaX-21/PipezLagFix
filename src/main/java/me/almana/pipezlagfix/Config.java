@@ -1,18 +1,18 @@
 package me.almana.pipezlagfix;
 
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.config.ModConfigEvent;
-import net.neoforged.neoforge.common.ModConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 
-@EventBusSubscriber(modid = Pipezlagfix.MODID, bus = EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Pipezlagfix.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Config {
-    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
-    public static final ModConfigSpec.IntValue BASE_BACKOFF_TICKS;
-    public static final ModConfigSpec.IntValue MAX_BACKOFF_TICKS;
-    public static final ModConfigSpec.BooleanValue ENABLED;
-    static final ModConfigSpec SPEC;
+    public static final ForgeConfigSpec.IntValue BASE_BACKOFF_TICKS;
+    public static final ForgeConfigSpec.IntValue MAX_BACKOFF_TICKS;
+    public static final ForgeConfigSpec.BooleanValue ENABLED;
+    static final ForgeConfigSpec SPEC;
 
     public static int baseBackoffTicks;
     public static int maxBackoffTicks;
