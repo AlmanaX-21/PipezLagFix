@@ -20,6 +20,7 @@ public class Pipezlagfix {
 
     public Pipezlagfix(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(Config::onLoad);
         NeoForge.EVENT_BUS.register(this);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         NeoForge.EVENT_BUS.addListener(this::onRegisterCommands);
